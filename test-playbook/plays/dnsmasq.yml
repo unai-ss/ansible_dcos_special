@@ -1,0 +1,24 @@
+---
+- name: install dnsmasq
+  package:
+    name: dnsmasq
+    state: present
+
+- lineinfile:add server to dnsmasq
+    path: /etc/dnsmasq.conf
+    regexp: '^server='
+    line: 'server=8.8.8.8'
+
+- name: copy dnsmasq.conf to the etc
+  copy:
+    src: /files/dnsmasq.conf
+    dest: /etc/dnsmasq.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+
+- name: Restart service dnsmasq, in all cases
+  service:
+    name: dnsmasqd
+    state: restarted

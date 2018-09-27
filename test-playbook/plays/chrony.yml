@@ -1,0 +1,40 @@
+---
+- name: install chrony
+  package:
+    name: chrony
+    state: present
+
+- name: install ntpdate
+  package:
+    name: chrony
+    state: present
+
+- name: Execute ntpdate runs
+  command:  "ntpdata -s hora.roa.es"
+  notify:
+    - start ntpd (rhel)
+  with_sequence: count="{{ ntpdate_runs|int }}"
+  when: ntpdate_enabled
+  tags: ntpdate-run
+
+- name: copy chrony.conf to the server
+  copy:
+    src: /files/chrony_server.conf
+    dest: /etc/chrony.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+
+- name: copy chrony.conf to the server
+  copy:
+    src: /files/chrony_client.conf
+    dest: /etc/chrony.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Restart service chronyd, in all cases
+  service:
+    name: chronyd
+    state: restarted
