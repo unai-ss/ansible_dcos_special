@@ -19,20 +19,21 @@ Complementa la informacion del **hosts.yaml**
 ```bash
  yum install epel-release -y
 ```
-###En el nodo bootstrap
+### En el nodo bootstrap
 ```bash
 yum install python-pip2 -y
 pip install --upgrade pip
 ```
-###En el nodo bootstrap.
+###`En el nodo bootstrap.
 Descargamos **dcos_generate_config** y lo copiamos en la raiz del bootstrap.
 En el original, no conseguia realizar la descarga, se realiza una primera vez
 un playbook install, se copia el fichero /var/lib/dcos_bootstrap, y se ejecuta una segunda vez el playbook install
-[pinchar aqui](curl -O https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh)
-
+```
+curl -O https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
+``
 a.- desinstalamos con ansible-playbook plays/uninstall.sh
 
-#Troubleshooting
+### Troubleshooting
 
 Todos los nodos con el **ntp activado** 
 ```bash
