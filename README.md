@@ -1,10 +1,10 @@
 # ansible_dcos_special
 
 **Comandos probados**
-'''bash
+```bash
 ansible-playbook plays/uninstall.yml
 ansible-playbook plays/install.yml
-'''
+```
 ### Ficheros
 **./ansible-dcos/hosts.yaml**
 Fichero de configuración del ansible dc/os
@@ -16,14 +16,14 @@ Complementa la informacion del **hosts.yaml**
 ### Pasos
 ###En todos los nodos
 - DNS y NTP activos y sincronizados. (sol. en entornos aislados dnsmasq y chrony)
-'''bash
+```bash
  yum install epel-release -y
-'''
+```
 ###En el nodo bootstrap
-'''bash
+```bash
 yum install python-pip2 -y
 pip install --upgrade pip
-'''
+```
 ###En el nodo bootstrap.
 Descargamos **dcos_generate_config** y lo copiamos en la raiz del bootstrap.
 En el original, no conseguia realizar la descarga, se realiza una primera vez
@@ -35,9 +35,9 @@ a.- desinstalamos con ansible-playbook plays/uninstall.sh
 #Troubleshooting
 
 Todos los nodos con el **ntp activado** 
-'''bash
+```bash
  timedatectl
  sytemctl restart chronyd
-'''
+```
 **La configuración del proxy no la coge del sistema, se agrega en el fichero config.yaml anterior**
 
